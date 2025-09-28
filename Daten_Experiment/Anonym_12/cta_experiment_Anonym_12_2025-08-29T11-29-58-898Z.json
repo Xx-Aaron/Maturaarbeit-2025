@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Anonym_12",
+    "layout": "D",
+    "timestamp": "2025-08-29T11:29:27.113Z",
+    "durationMs": 4492,
+    "ctaPosition": "overlay-bottom-right",
+    "ctaCoordinates": {
+      "x": 830,
+      "y": 500
+    },
+    "scrollEvents": [
+      {
+        "type": "scroll",
+        "x": 0,
+        "y": 150,
+        "timestamp": 1756466962646
+      }
+    ]
+  },
+  {
+    "name": "Anonym_12",
+    "layout": "C",
+    "timestamp": "2025-08-29T11:29:33.193Z",
+    "durationMs": 4069,
+    "ctaPosition": "center-below-image",
+    "ctaCoordinates": {
+      "x": 500,
+      "y": 640
+    },
+    "scrollEvents": []
+  },
+  {
+    "name": "Anonym_12",
+    "layout": "B",
+    "timestamp": "2025-08-29T11:29:40.953Z",
+    "durationMs": 5753,
+    "ctaPosition": "left-above-image",
+    "ctaCoordinates": {
+      "x": 180,
+      "y": 180
+    },
+    "scrollEvents": []
+  },
+  {
+    "name": "Anonym_12",
+    "layout": "A",
+    "timestamp": "2025-08-29T11:29:46.914Z",
+    "durationMs": 3955,
+    "ctaPosition": "right-below-text",
+    "ctaCoordinates": {
+      "x": 720,
+      "y": 460
+    },
+    "scrollEvents": []
+  }
+]

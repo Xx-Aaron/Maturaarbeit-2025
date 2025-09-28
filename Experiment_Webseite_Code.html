@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maturaarbeit – Aaron</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    :root {
+      --navy: #0a1a2f;
+      --navy-light: #1f2e44;
+      --white: #ffffff;
+      --gray: #f4f4f4;
+      --gold: #c8b27c;
+      --font: 'Inter', sans-serif;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--navy);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    /* Intro Header */
+    #introHeader {
+      background: var(--navy);
+      color: var(--white);
+      padding: 30px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-bottom: 3px solid var(--gold);
+    }
+    .container {
+      max-width: 960px;
+      margin: auto;
+      padding: 3rem 1rem;
+    }
+    .hidden {
+      display: none;
+    }
+    input[type="text"] {
+      padding: 14px;
+      font-size: 1rem;
+      margin-top: 15px;
+      width: 300px;
+      border-radius: 8px;
+      border: 1px solid var(--navy-light);
+      background-color: var(--gray);
+    }
+    .checkbox {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    .button {
+      background: var(--navy);
+      color: var(--white);
+      padding: 16px 36px;
+      margin-top: 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(10, 26, 47, 0.2);
+    }
+    header.shop-header {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--navy-light);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header.shop-header img.logo {
+      height: 40px;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.3s forwards;
+    }
+    nav.shop-nav {
+      display: flex;
+      gap: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    nav.shop-nav a {
+      text-decoration: none;
+      color: var(--navy);
+      position: relative;
+    }
+    nav.shop-nav a::after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      background: var(--gold);
+      width: 0;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s;
+    }
+    nav.shop-nav a:hover::after {
+      width: 100%;
+    }
+    .search-bar input {
+      padding: 10px 16px;
+      border-radius: 30px;
+      border: 1.5px solid var(--navy-light);
+      width: 180px;
+      background-color: var(--gray);
+    }
+    .layout {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(10, 26, 47, 0.07);
+      padding: 40px;
+      margin-top: 30px;
+      min-height: 650px;
+      max-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+    .product-info, .product-image, .product-cta {
+      padding: 20px;
+    }
+    .product-image img {
+      height: 350px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(10, 26, 47, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .product-image img:hover {
+      transform: scale(1.02);
+    }
+    .product-info p {
+      max-height: 90px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 1rem;
+      color: var(--navy-light);
+    }
+    .product-info h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .product-info strong {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .product-cta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .cta {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 16px 36px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(200, 178, 124, 0.4);
+    }
+    /* Layout-Spezifika */
+    #layoutA, #layoutC {
+      align-items: center;
+      text-align: center;
+    }
+    #layoutB {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+    #layoutB .right-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+    #layoutC {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+    #layoutD {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+    #layoutD .rotated img {
+      transform: rotate(-8deg) scale(1.05);
+      box-shadow: 0 0 0 6px rgba(200, 178, 124, 0.2);
+    }
+    .abstract-text {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .center-text {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    @media (max-height: 800px) {
+      .layout {
+        min-height: auto;
+        padding: 20px;
+      }
+      .product-image img {
+        height: 300px;
+      }
+    }
+    /* HEADER MOTION & DESIGN UPGRADE */
+    .shop-header {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(10, 26, 47, 0.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 40px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        animation: slideDown 0.6s ease-in-out forwards;
+        transform: translateY(-100%);
+    }
+    @keyframes slideDown {
+      to {
+        transform: translateY(0);
+      } 
+    }
+    .animated-logo {
+        height: 40px;
+        opacity: 0;
+        animation: fadeIn 1s ease 0.3s forwards;
+    }
+    /* CTA immer sichtbar: fixed position am unteren Viewport-Rand */
+    .fixed-cta {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2000;
+      background: var(--gold);
+      padding: 16px 36px;
+      border-radius: 50px;
+      box-shadow: 0 8px 16px rgba(200, 178, 124, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .fixed-cta:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+    /* Platzhalter im Layout für Reservierung des CTA-Spacers */
+    .layout {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 90vh;
+      padding: 20px;
+      overflow-y: auto; /* erlaubt bei Bedarf vertikales Scrollen */
+    }
+    /* Einheitliche Bildgröße bestätigen */
+    .product-image img {
+      height: 350px;
+      object-fit: cover;
+      width: 100%;
+      border-radius: 14px;
+    }
+    .product-cta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+    .product-info p {
+      max-height: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .layout {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      min-height: 780px;
+      box-sizing: border-box;
+    }
+    .layout-A, .layout-B {
+      flex-direction: row;
+    }
+    .layout-C {
+      flex-direction: column;
+      text-align: center;
+    }
+    .layout-D {
+      flex-direction: column;
+      position: relative;
+    }
+    .product-image img {
+      height: 350px;
+      width: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .product-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+    .product-info h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .product-info p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .price-line {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-top: 6px;
+    }
+    .trust {
+      color: var(--navy-light);
+      font-weight: 400;
+      font-size: 0.95rem;
+    }
+    .trust-under {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 6px;
+    }
+    .product-cta {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .right-align {
+      align-items: flex-end;
+    }
+    .left-align {
+      align-items: flex-start;
+    }
+    .center-text {
+      align-items: center;
+    }
+    /* CTA Button Design */
+    .cta {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 14px 32px;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .cta:hover {
+      background: #e6cc8a;
+      transform: scale(1.05);
+    }
+    /* D: Overlay CTA */
+    .overlay-container {
+      position: relative;
+      display: inline-block;
+    }
+    .overlay-cta {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      background: rgba(200, 178, 124, 0.88);
+      color: var(--navy);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: bold;
+      border: none;
+      backdrop-filter: blur(4px);
+    }
+    .layout.layout-D .trust-under {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .product-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    /* Loading screen styles */
+    #loadingScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--navy);
+      display: none; /* Initially hidden */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(200, 178, 124, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--gold);
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    #loadingText {
+      margin-top: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+<!-- Loading Screen -->
+<div id="loadingScreen">
+  <div class="loading-spinner"></div>
+  <div id="loadingText">Laden...</div>
+</div>
+<!-- Intro / Startseite -->
+<div id="intro">
+  <div id="introHeader">Maturaarbeit – Aaron</div>
+  <div class="container">
+    <h1>Willkommen zum CTA-Experiment</h1>
+    <p>Du wirst gleich vier verschiedene Startseiten-Layouts sehen – immer mit demselben Produkt.</p>
+    <p>Bitte klicke auf „Jetzt kaufen“, sobald du dich entscheiden würdest, das Polo-Shirt zu kaufen.</p>
+    <p>Wir messen deine Reaktionszeit, um zu untersuchen, wie das Layout deine Entscheidung beeinflusst.</p>
+    <div class="checkbox">
+      <input type="checkbox" id="consentCheckbox" />
+      <label for="consentCheckbox">Ich stimme der Verarbeitung meiner Daten zu Forschungszwecken zu.</label>
+    </div>
+    <input type="text" id="participantName" placeholder="Dein Name" />
+    <br />
+    <button class="button" onclick="startExperiment()">Experiment starten</button>
+  </div>
+</div>
+<!-- Experiment -->
+<div class="container hidden" id="experiment">
+  <header class="shop-header">
+  <div class="header-left">
+    <h2>Emerson & Stone</h2>
+  </div>
+  <nav class="shop-nav">
+    <a href="#">Herren</a>
+    <a href="#">Damen</a>
+    <a href="#">Poloshirts</a>
+    <a href="#">Neuheiten</a>
+  </nav>
+  <div class="search-bar">
+    <input type="text" placeholder="Suchen..." />
+  </div>
+</header>
+  <div id="layoutContainer"></div>
+</div>
+<!-- Danke -->
+<div class="container hidden" id="thankyou">
+  <h2>Vielen Dank für deine Teilnahme, <span id="finalName"></span>!</h2>
+  <p>Du kannst jetzt deine Ergebnisse herunterladen:</p>
+  <button class="button" onclick="downloadResults()">Ergebnisse herunterladen (JSON)</button>
+</div>
+<script>
+// === ScrollyLogger ===
+class ScrollyLogger {
+  constructor(flushIntervalMs = 2000) {
+    this.buffer = [];
+    this.isFlushing = false;
+    this.flushIntervalMs = flushIntervalMs;
+    this.scrollHandler = this._onScroll.bind(this);
+    this.intervalId = null;
+    this.getSessionId = () => null;
+  }
+
+  start() {
+    window.addEventListener("scroll", this.scrollHandler);
+    this.intervalId = setInterval(() => {
+      // optional regelmäßiges Debug-Flushen oder nur interne Verwaltung
+      this._periodicNoOp();
+    }, this.flushIntervalMs);
+  }
+
+  stop() {
+    window.removeEventListener("scroll", this.scrollHandler);
+    if (this.intervalId) clearInterval(this.intervalId);
+  }
+
+  _onScroll() {
+    const y = window.scrollY || window.pageYOffset;
+    const x = window.scrollX || 0;
+    const timestamp = Date.now();
+    this.buffer.push({ type: "scroll", x, y, timestamp });
+  }
+
+  // Intern, aktuell macht nichts außer existieren zu lassen (kann erweitert werden)
+  _periodicNoOp() {
+    // Hier könntest du z.B. im Debugmodus die Buffergröße loggen:
+    // console.debug("Scrolly buffer size:", this.buffer.length);
+  }
+
+  clearBuffer() {
+    this.buffer = [];
+  }
+
+  setSessionIdGetter(fn) {
+    this.getSessionId = fn;
+  }
+
+  // Gibt die aktuellen gesammelten Events zurück und leert Buffer (mit Safe-Fallback)
+  async finalizeFlush(timeoutMs = 800) {
+    if (this.isFlushing) {
+      // Wenn schon ein Flush läuft, warte kurz
+      await new Promise((r) => setTimeout(r, 50));
+    }
+    let toReturn = [];
+    const runFlush = async () => {
+      if (this.buffer.length === 0) return [];
+      this.isFlushing = true;
+      const snapshot = this.buffer.slice();
+      this.buffer = [];
+      try {
+        // Hier könntest du optional ein realer Upload stattfinden lassen.
+        // Beispiel: await fetch("/api/logs/scroll", { ... });
+        // Für jetzt: return snapshot lokal.
+        return snapshot;
+      } catch (err) {
+        // Bei Fehlern: wieder zurück in Buffer, damit nichts verloren geht
+        this.buffer = snapshot.concat(this.buffer);
+        return [];
+      } finally {
+        this.isFlushing = false;
+      }
+    };
+
+    // Timeout-gesteuert
+    toReturn = await Promise.race([
+      runFlush(),
+      new Promise((resolve) => setTimeout(() => resolve([]), timeoutMs)),
+    ]);
+    return toReturn;
+  }
+}
+
+// === Bestehender Experiment-Code mit ScrollyLogger-Integration ===
+
+const layouts = [ 
+  {
+    id: "A",
+    image: "products/shirt1.jpg",
+    html: () => `
+      <div class="layout layout-A">
+        <div class="product-image"><img src="products/shirt1.jpg" /></div>
+        <div class="product-content">
+          <div class="product-info">
+            <h3>Premium Polo-Shirt – Emerson & Stone</h3>
+            <p>Edle Verarbeitung trifft modernen Schnitt. Dezentes Statement, das bleibt.</p>
+            <div class="price-line">CHF 89.00 <span class="trust">| Gratis Versand</span></div>
+          </div>
+          <div class="product-cta right-align">
+            <button class="cta" onclick="recordClick('A')">Jetzt kaufen</button>
+            <p class="trust-under">30 Tage Rückgabe – Sicherer Checkout</p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: "B",
+    image: "products/shirt2.jpg",
+    html: () => `
+      <div class="layout layout-B">
+        <div class="product-cta left-align">
+          <button class="cta" onclick="recordClick('B')">Jetzt kaufen</button>
+          <p class="trust-under">30 Tage Rückgabe – Sicherer Checkout</p>
+        </div>
+        <div class="product-image"><img src="products/shirt2.jpg" /></div>
+        <div class="product-info">
+          <h3>Premium Polo-Shirt – Emerson & Stone</h3>
+          <p>Edle Verarbeitung trifft modernen Schnitt. Dezentes Statement, das bleibt.</p>
+          <div class="price-line">CHF 89.00 <span class="trust">| Gratis Versand</span></div>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: "C",
+    image: "products/shirt3.jpg",
+    html: () => `
+      <div class="layout layout-C">
+        <div class="product-image"><img src="products/shirt3.jpg" /></div>
+        <div class="product-info center-text">
+          <h3>Premium Polo-Shirt – Emerson & Stone</h3>
+          <p>Edle Verarbeitung trifft modernen Schnitt. Dezentes Statement, das bleibt.</p>
+          <div class="price-line">CHF 89.00 <span class="trust">| Gratis Versand</span></div>
+        </div>
+        <div class="product-cta center-text">
+          <button class="cta" onclick="recordClick('C')">Jetzt kaufen</button>
+          <p class="trust-under">30 Tage Rückgabe – Sicherer Checkout</p>
+        </div>
+      </div>
+    `
+  },
+  {
+    id: "D",
+    image: "products/shirt4.jpg",
+    html: () => `
+      <div class="layout layout-D">
+        <div class="product-info center-text">
+          <h3>Premium Polo-Shirt – Emerson & Stone</h3>
+          <p>Edle Verarbeitung trifft modernen Schnitt. Dezentes Statement, das bleibt.</p>
+          <div class="price-line">CHF 89.00 <span class="trust">| Gratis Versand</span></div>
+        </div>
+        <div class="product-image overlay-container">
+          <img src="products/shirt4.jpg" />
+          <button class="cta overlay-cta" onclick="recordClick('D')">Jetzt kaufen</button>
+        </div>
+        <p class="trust-under center-text">30 Tage Rückgabe – Sicherer Checkout</p>
+      </div>
+    `
+  }
+];
+const layoutMeta = {
+  "A": {
+    ctaPosition: "right-below-text",
+    ctaCoordinates: { x: 720, y: 460 }
+  },
+  "B": {
+    ctaPosition: "left-above-image",
+    ctaCoordinates: { x: 180, y: 180 }
+  },
+  "C": {
+    ctaPosition: "center-below-image",
+    ctaCoordinates: { x: 500, y: 640 }
+  },
+  "D": {
+    ctaPosition: "overlay-bottom-right",
+    ctaCoordinates: { x: 830, y: 500 }
+  }
+};
+
+let participant = "";
+let experimentData = [];
+let remainingLayouts = [];
+let layoutStartTime = null;
+let loadingTimer = null;
+let scrollyLogger = null;
+let advancedAlready = false; // Verhindert Doppel-Advancement
+
+function startExperiment() {
+  const name = document.getElementById("participantName").value.trim();
+  const consent = document.getElementById("consentCheckbox").checked;
+  if (!name || !consent) {
+    alert("Bitte gib deinen Namen ein und stimme der Einwilligung zu.");
+    return;
+  }
+  participant = name;
+
+  // ScrollyLogger initialisieren
+  scrollyLogger = new ScrollyLogger(1500);
+  scrollyLogger.setSessionIdGetter(() => participant);
+  scrollyLogger.start();
+
+  document.getElementById("intro").classList.add("hidden");
+  document.getElementById("experiment").classList.remove("hidden");
+  remainingLayouts = shuffleArray([...layouts]);
+  showNextLayout(); // erstes Layout direkt zeigen
+}
+
+function showLoadingScreen() {
+  document.getElementById('loadingScreen').style.display = 'flex';
+  // Nach 2 Sekunden Ladebildschirm ausblenden und nächstes Layout zeigen
+  loadingTimer = setTimeout(() => {
+    document.getElementById('loadingScreen').style.display = 'none';
+    showNextLayout();
+  }, 2000);
+}
+
+function showNextLayout() {
+  if (remainingLayouts.length > 0) {
+    const current = remainingLayouts.pop();
+    document.getElementById("layoutContainer").innerHTML = current.html();
+    layoutStartTime = Date.now();
+    window.scrollTo(150, 150);
+    advancedAlready = false; // erneutes Vorankommen erlauben
+    // Vor dem neuen Layout: Buffer leeren, damit alte Scrolls nicht reinmischen
+    if (scrollyLogger) scrollyLogger.clearBuffer();
+  } else {
+    endExperiment();
+  }
+}
+
+function nextLayout() {
+  // Sicherstellen, dass nicht doppelt ausgeführt wird
+  if (advancedAlready) return;
+  advancedAlready = true;
+  showLoadingScreen();
+}
+
+async function recordClick(layoutId) {
+  // Verhindern, dass mehrfach geklickt wird und mehrfach advance passiert
+  if (advancedAlready) return;
+
+  const duration = Date.now() - layoutStartTime;
+  const meta = layoutMeta[layoutId];
+  const timestamp = new Date().toISOString();
+
+  // 1. Finaler Flush vom ScrollyLogger (mit Timeout)
+  let scrollEvents = [];
+  if (scrollyLogger) {
+    scrollEvents = await scrollyLogger.finalizeFlush(800);
+  }
+
+  // 2. Daten sammeln
+  const entry = {
+    name: participant,
+    layout: layoutId,
+    timestamp,
+    durationMs: duration,
+    ctaPosition: meta.ctaPosition,
+    ctaCoordinates: meta.ctaCoordinates,
+    scrollEvents, // neu ergänzt
+  };
+  experimentData.push(entry);
+
+  // 3. Laden nächste Layouts (inkl. Safe-Fallback, falls flush ewig hängt)
+  if (loadingTimer) {
+    clearTimeout(loadingTimer);
+    loadingTimer = null;
+  }
+  nextLayout();
+}
+
+function endExperiment() {
+  // ScrollyLogger stoppen
+  if (scrollyLogger) scrollyLogger.stop();
+
+  document.getElementById("experiment").classList.add("hidden");
+  document.getElementById("thankyou").classList.remove("hidden");
+  document.getElementById("finalName").innerText = participant;
+}
+
+function downloadResults() {
+  const now = new Date().toISOString().replace(/[:.]/g, "-");
+  const filename = `cta_experiment_${participant.replace(/\s+/g, "_")}_${now}.json`;
+  const blob = new Blob([JSON.stringify(experimentData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+function saveLayoutScreenshot(layoutName) {
+    html2canvas(document.body, {
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: document.documentElement.scrollWidth,
+        windowHeight: document.documentElement.scrollHeight
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = `layout_${layoutName}_reference.png`;
+        link.click();
+    });
+}
+
+</script>
+
+
+
+</script>
+</body>
+</html>
